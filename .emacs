@@ -253,7 +253,7 @@
                       '(javascript-jshint)))
 
 (put 'flycheck-clang-args 'safe-local-variable (lambda (xx) t))
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
