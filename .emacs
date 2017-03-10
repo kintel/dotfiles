@@ -9,6 +9,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+
 ;
 ; Set Cmd to meta (necessary since Emacs 23)
 ;
@@ -102,8 +103,9 @@
 (defun resize-frame ()
   "Resize current frame to 91 50"
   (interactive)
-  (set-frame-size (selected-frame) 91 50))
+  (set-frame-size (selected-frame) 120 60))
 (resize-frame)
+(desktop-save-mode 1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -113,7 +115,10 @@
  '(js-indent-level 2)
  '(js3-highlight-external-variables nil)
  '(js3-mode-show-parse-errors nil)
- '(js3-mode-show-strict-warnings nil))
+ '(js3-mode-show-strict-warnings nil)
+ '(package-selected-packages
+   (quote
+    (ag clang-format smart-tabs-mode nvm js3-mode flycheck-pos-tip exec-path-from-shell))))
  ; We use flycheck for this
 
 (put 'upcase-region 'disabled nil)
@@ -179,6 +184,8 @@
     (fill-paragraph nil)))
 
 (global-set-key "\C-\M-q" 'unfill-paragraph)
+
+(global-set-key [S-tab] 'clang-format-region)
 
 ;
 ; CMake mode

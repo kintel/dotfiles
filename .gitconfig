@@ -9,6 +9,7 @@
         br = branch
         bra = branch -a
         gl = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+        format = clang-format
 
 [core]
         pager = less -FrX -+S
