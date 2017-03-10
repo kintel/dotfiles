@@ -1,0 +1,74 @@
+; MELPA
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
+;
+; Mac keys
+;
+(setq mac-option-key-is-meta nil)
+(setq mac-command-key-is-meta t)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier nil)
+; Cmd-h = Hide
+(global-set-key "\M-h" 'ns-do-hide-emacs)
+
+;;
+;; Regular keys
+;;
+(global-set-key "\M-j" 'goto-line)
+(global-set-key "\M-z" 'undo)
+(global-set-key (quote [f12]) 'call-last-kbd-macro)
+(global-set-key (quote [f11]) 'overwrite-mode)
+(global-set-key [home] 'beginning-of-buffer)
+(global-set-key [end] 'end-of-buffer)
+(global-set-key "\C-\M-a" 'beginning-of-buffer)
+(global-set-key "\C-\M-e" 'end-of-buffer)
+
+;; 
+;; Mac-specific tuning
+;; 
+
+; Open instead of append dragged files
+(define-key global-map [ns-drag-file] 'ns-find-file)
+; Never open dragged files in a new frame
+(setq ns-pop-up-frames nil)
+; Cursor up/down follows newline, not visual line (reverts to Emacs 22 behavior)
+(setq line-move-visual nil)
+
+;;
+;; Misc. settings
+;;
+(tool-bar-mode 0)
+(blink-cursor-mode -1)
+(show-paren-mode 1)
+(setq blink-matching-paren t)
+(toggle-uniquify-buffer-names)
+;; Change selection mode
+(delete-selection-mode 1)
+
+;; Resize window
+(defun resize-frame ()
+  "Resize current frame to 91 50"
+  (interactive)
+  (set-frame-size (selected-frame) 120 60))
+(resize-frame)
+
+;;
+;; C++ Stuff
+;;
+(global-set-key [S-tab] 'clang-format-region)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (smart-tabs-mode nvm js3-mode helm flycheck-pos-tip exec-path-from-shell company cmake-ide clang-format ag))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
