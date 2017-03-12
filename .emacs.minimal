@@ -43,9 +43,12 @@
 (blink-cursor-mode -1)
 (show-paren-mode 1)
 (setq blink-matching-paren t)
-(toggle-uniquify-buffer-names)
 ;; Change selection mode
 (delete-selection-mode 1)
+
+;; Buffer name
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 ;; Resize window
 (defun resize-frame ()
@@ -58,6 +61,13 @@
 ;; C++ Stuff
 ;;
 (global-set-key [S-tab] 'clang-format-region)
+
+;; helm
+(require 'helm)
+(require 'helm-config)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -65,7 +75,8 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (smart-tabs-mode nvm js3-mode helm flycheck-pos-tip exec-path-from-shell company cmake-ide clang-format ag))))
+    (reveal-in-osx-finder smart-tabs-mode nvm js3-mode helm flycheck-pos-tip exec-path-from-shell company cmake-ide clang-format ag)))
+)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
