@@ -46,6 +46,11 @@
 ;; Change selection mode
 (delete-selection-mode 1)
 
+; recentf-mode
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+
 ;; Buffer name
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
