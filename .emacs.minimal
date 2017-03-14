@@ -3,6 +3,12 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+;;
+;; Get path from shell
+;;
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
 ;
 ; Mac keys
 ;
@@ -67,10 +73,32 @@
 ;;
 (global-set-key [S-tab] 'clang-format-region)
 
+(require 'rtags)
+(cmake-ide-setup)
+
+;; Thalmic C++ style
+(c-add-style "thalmic" 
+	     '("stroustrup"
+	       (indent-tabs-mode . nil)        ; use spaces rather than tabs
+	       (c-basic-offset . 4)            ; indent by four spaces
+	       (c-offsets-alist . ((inline-open . 0)  ; custom indentation rules
+				   (brace-list-open . 0)
+				   (statement-case-open . +)))))
+
+(defun thalmic-c++-mode-hook ()
+  (c-set-style "thalmic")        ; use my-style defined above
+  (auto-fill-mode)         
+  (c-toggle-auto-hungry-state 1))
+
+(add-hook 'c++-mode-hook 'thalmic-c++-mode-hook)
+
+
 ;; helm
 (require 'helm)
 (require 'helm-config)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
 
 (custom-set-variables
@@ -80,7 +108,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (reveal-in-osx-finder smart-tabs-mode nvm js3-mode helm flycheck-pos-tip exec-path-from-shell company cmake-ide clang-format ag)))
+    (cmake-mode reveal-in-osx-finder smart-tabs-mode nvm js3-mode helm flycheck-pos-tip exec-path-from-shell company cmake-ide clang-format ag)))
 )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
